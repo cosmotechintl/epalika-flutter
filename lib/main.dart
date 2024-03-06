@@ -1,30 +1,46 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:e_nagarpalika/Health.dart';
+import 'package:e_nagarpalika/NagarPatro.dart';
+import 'package:e_nagarpalika/adminstration.dart';
+import 'package:e_nagarpalika/ambulance.dart';
+import 'package:e_nagarpalika/e_sifarish.dart';
+import 'package:e_nagarpalika/education.dart';
+import 'package:e_nagarpalika/environment.dart';
+import 'package:e_nagarpalika/financial_services.dart';
+import 'package:e_nagarpalika/helpline_number.dart';
+import 'package:e_nagarpalika/human_right.dart';
+import 'package:e_nagarpalika/news_portal.dart';
+import 'package:e_nagarpalika/notice.dart';
+import 'package:e_nagarpalika/police.dart';
+import 'package:e_nagarpalika/public_forum.dart';
+import 'package:e_nagarpalika/queries.dart';
+import 'package:e_nagarpalika/suggestion.dart';
+import 'package:e_nagarpalika/toruism_area.dart';
 import 'package:e_nagarpalika/utility.dart';
+import 'package:e_nagarpalika/ward_services.dart';
 import 'package:flutter/material.dart';
-
+import 'blog.dart';
+import 'contact_mayor.dart';
 import 'login.dart';
 
 void main() {
-  runApp( MaterialApp(
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    theme:ThemeData(
-         appBarTheme: AppBarTheme(
-           backgroundColor: const Color(0xff64b5f6)
-         ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: TextButton.styleFrom(
-                backgroundColor: const Color(0xff64b5f6),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                textStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    wordSpacing: 2,
-                    letterSpacing: 2))),
-          scaffoldBackgroundColor: const Color(0xFFFFFBFE),
-
+    theme: ThemeData(
+      appBarTheme: const AppBarTheme(backgroundColor: Color(0xff64b5f6)),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: TextButton.styleFrom(
+              backgroundColor: const Color(0xff64b5f6),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  wordSpacing: 2,
+                  letterSpacing: 2))),
+      scaffoldBackgroundColor: const Color(0xFFFFFBFE),
     ),
-    home: HomeScreen(),
+    home: const HomeScreen(),
   ));
 }
 
@@ -46,51 +62,63 @@ class HomeScreen extends StatelessWidget {
           children: [
             const LanguageSelectWidget(),
             Utility.createCustomIconButton(
-                "doctor.png", "Health", horizontal: true),
+                "doctor.png", "Health", const Health(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "education.png", "Education", horizontal: true),
+                "education.png", "Education", const Education(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "helpline.png", "Helpline Number", horizontal: true),
+                "helpline.png", "Helpline Number", const HelplineNumber(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "ambulance.png", "Ambulance", horizontal: true),
+                "ambulance.png", "Ambulance", const Ambulance(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "police.png", "Police", horizontal: true),
+                "police.png", "Police", const Police(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "administrator.png", "Administration", horizontal: true),
+                "administrator.png", "Administration", const Adminstration(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "tourism.png", "Tourism Area", horizontal: true),
+                "tourism.png", "Tourism Area", const TourismArea(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "news.png", "News Portal", horizontal: true),
+                "news.png", "News Portal", const NewsPortal(),
+                horizontal: true),
+            Utility.createCustomIconButton("blog.png", "Blog", const Blog(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "blog.png", "Blog", horizontal: true),
+                "environmentalism.png", "Environment", const Environment(),
+                horizontal: true),
+            Utility.createCustomIconButton("note.png", "Notice", const Notice(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "environmentalism.png", "Environment", horizontal: true),
+                "suggestion.png", "Suggestion", const Suggestion(),
+                horizontal: true),
             Utility.createCustomIconButton(
-                "note.png", "Notice", horizontal: true),
-            Utility.createCustomIconButton(
-                "suggestion.png", "Suggestion", horizontal: true),
-            Utility.createCustomIconButton(
-                "phone.png", "Contact Mayor", horizontal: true),
+                "phone.png", "Contact Mayor", const ContactMayor(),
+                horizontal: true),
           ],
         ),
       ),
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
             "Nagarjuna",
             textAlign: TextAlign.center,
           ),
         ),
-        actions:[
+        actions: [
           IconButton(
               onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=> const Login()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => const Login()));
               },
-              icon: const Icon(Icons.account_circle,
+              icon: const Icon(
+                Icons.account_circle,
                 color: Colors.white,
                 size: 42.0,
-              )
-          ),
+              )),
         ],
       ),
       body: SingleChildScrollView(
@@ -100,94 +128,81 @@ class HomeScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.012,
+              height: MediaQuery.of(context).size.height * 0.012,
             ),
             NewsSwipePage(newsList: newsList),
             SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.025,
+              height: MediaQuery.of(context).size.height * 0.025,
             ),
             Section(
               title: 'Administrative Solutions',
               iconsAndTexts: [
-                IconAndText("administrator.png", "Administration"),
-                IconAndText("salary.png", "Financial Services"),
-                IconAndText("law.png", "Law and Human\nRights"),
-                IconAndText("nagarpatro.png", "Nagar Patro"),
-                IconAndText("phone.png", "Contact Mayor"),
-                IconAndText("query.png", "Queries"),
+                IconAndText("administrator.png", "Administration",
+                    const Adminstration()),
+                IconAndText(
+                    "municipal.png", "Ward\nServices", const WardServices()),
+                IconAndText("salary.png", "Financial Services",
+                    const FinancialServices()),
+                IconAndText("law.png", "Law and Human\nRights",
+                    const LawandHumanRights()),
+                IconAndText(
+                    "nagarpatro.png", "Nagar Patro", const NagarPatro()),
+                IconAndText("phone.png", "Contact Mayor", const ContactMayor()),
+                IconAndText("query.png", "Queries", const Queries()),
               ],
             ),
             SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.025,
+              height: MediaQuery.of(context).size.height * 0.025,
             ),
             Section(
               title: 'Community Engagement',
               iconsAndTexts: [
-                IconAndText("education.png", "Education"),
-                IconAndText("doctor.png", "Health"),
-                IconAndText("environmentalism.png", "Environment"),
-                IconAndText("tourism.png", "Tourism\narea"),
+                IconAndText("education.png", "Education", const Education()),
+                IconAndText("doctor.png", "Health", const Health()),
+                IconAndText(
+                    "environmentalism.png", "Environment", const Environment()),
+                IconAndText(
+                    "tourism.png", "Tourism\narea", const TourismArea()),
               ],
             ),
             SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.025,
+              height: MediaQuery.of(context).size.height * 0.025,
             ),
             Section(
               title: "Official Notices And\n Announcements",
               iconsAndTexts: [
-                IconAndText("note.png", "Notice"),
-                IconAndText("suggestion.png", "Suggestion"),
-                IconAndText("sifarish.png", "E-sifarish"),
+                IconAndText("note.png", "Notice", const Notice()),
+                IconAndText("suggestion.png", "Suggestion", const Suggestion()),
+                IconAndText("sifarish.png", "E-sifarish", const ESifarish()),
               ],
             ),
             SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.025,
+              height: MediaQuery.of(context).size.height * 0.025,
             ),
-            Section(
-                title: "Emergency Services",
-                iconsAndTexts: [
-                  IconAndText("helpline.png", "Helpline\nNumbers"),
-                  IconAndText("ambulance.png", "Ambulance"),
-                  IconAndText("police.png", "Police"),
-                ]),
+            Section(title: "Emergency Services", iconsAndTexts: [
+              IconAndText(
+                  "helpline.png", "Helpline\nNumbers", const HelplineNumber()),
+              IconAndText("ambulance.png", "Ambulance", const Ambulance()),
+              IconAndText("police.png", "Police", const Police()),
+            ]),
             SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.025,
+              height: MediaQuery.of(context).size.height * 0.025,
             ),
             Section(
               title: "Online Information",
               iconsAndTexts: [
-                IconAndText("news.png", "News Portal"),
-                IconAndText("blog.png", "Blog"),
+                IconAndText("news.png", "News Portal", const NewsPortal()),
+                IconAndText("blog.png", "Blog", const Blog()),
               ],
             ),
             SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.025,
+              height: MediaQuery.of(context).size.height * 0.025,
             ),
             Section(
               title: "Public Forums",
               iconsAndTexts: [
-                IconAndText("public.png", "Public\nForums"),
+                IconAndText(
+                    "public.png", "Public\nForums", const PublicForum()),
               ],
             ),
           ],
@@ -214,10 +229,7 @@ class _NewsSwipePageState extends State<NewsSwipePage> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+      width: MediaQuery.of(context).size.width,
       height: 200.0,
       child: CarouselSlider.builder(
         itemCount: newsList.length,
@@ -269,10 +281,7 @@ class Section extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.92,
+      width: MediaQuery.of(context).size.width * 0.92,
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
@@ -295,31 +304,29 @@ class Section extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.2,
             child: iconsAndTexts.length > 3
                 ? CustomScrollView(
-              scrollDirection: Axis.horizontal,
-              slivers: [
-                SliverList.builder(
-                  itemCount: iconsAndTexts.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Utility.createCustomIconButton(
-                        iconsAndTexts[index].icon, iconsAndTexts[index].text);
-                  },
-                ),
-              ],
-            )
+                    scrollDirection: Axis.horizontal,
+                    slivers: [
+                      SliverList.builder(
+                        itemCount: iconsAndTexts.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Utility.createCustomIconButton(
+                              iconsAndTexts[index].icon,
+                              iconsAndTexts[index].text,
+                              iconsAndTexts[index].screen);
+                        },
+                      ),
+                    ],
+                  )
                 : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: iconsAndTexts
-                  .map((data) =>
-                  Utility.createCustomIconButton(
-                      data.icon, data.text))
-                  .toList(),
-            ),
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: iconsAndTexts
+                        .map((data) => Utility.createCustomIconButton(
+                            data.icon, data.text, data.screen))
+                        .toList(),
+                  ),
           ),
         ],
       ),
@@ -352,15 +359,13 @@ class _LanguageSelectWidgetState extends State<LanguageSelectWidget> {
         ),
         const Text("Nepali"),
       ],
-
     );
   }
 }
 
-
 class IconAndText {
   final String icon;
   final String text;
-
-  IconAndText(this.icon, this.text);
+  final Widget screen;
+  IconAndText(this.icon, this.text, this.screen);
 }

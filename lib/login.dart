@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -33,6 +33,7 @@ class _LoginState extends State<Login> {
         alignment: Alignment.topCenter,
         child: Form(
           key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,14 +43,14 @@ class _LoginState extends State<Login> {
                 child: TextFormField(
                   controller: _emailController,
                   focusNode: _emailFocus,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "User Email",
                     hintText: "User Email",
                     filled: true,
-                      border: InputBorder.none,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      ),
+                    border: InputBorder.none,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
                     fillColor: Color(0xFFEEEEEE),
                     contentPadding: EdgeInsets.all(10.0),
                   ),
@@ -74,7 +75,7 @@ class _LoginState extends State<Login> {
                   controller: _passwordController,
                   focusNode: _passwordFocus,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Password",
                     hintText: "Password",
                     filled: true,
@@ -98,7 +99,7 @@ class _LoginState extends State<Login> {
               ),
               ElevatedButton(
                 onPressed: _login,
-                child: Text('Login'),
+                child: const Text('Login'),
               ),
             ],
           ),
