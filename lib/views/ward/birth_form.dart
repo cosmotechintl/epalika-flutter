@@ -1,4 +1,4 @@
-import 'package:e_nagarpalika/dropdown.dart';
+import 'package:e_nagarpalika/service/utilities/dropdown.dart';
 import 'package:flutter/material.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -88,6 +88,8 @@ class _BirthFormState extends State<BirthForm> {
   final FocusNode _motherGauFocus = FocusNode();
   final FocusNode _motherHouseNumberFocus = FocusNode();
 
+  String? selectedValue;
+
   @override
   Widget build(BuildContext context) {
     List<String> birthAddress = [
@@ -108,7 +110,7 @@ class _BirthFormState extends State<BirthForm> {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.97,
@@ -179,7 +181,8 @@ class _BirthFormState extends State<BirthForm> {
                       focus: _employeeRefnoFocus,
                       changeFocus: _regnoFocus,
                       label: "Employee Reference No",
-                      textInputType: TextInputType.number),
+                      textInputType: TextInputType.number
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.05,
                   ),
@@ -188,7 +191,8 @@ class _BirthFormState extends State<BirthForm> {
                       focus: _regnoFocus,
                       changeFocus: _regDateFocus,
                       label: "Registration No.",
-                      textInputType: TextInputType.number),
+                      textInputType: TextInputType.number
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.05,
                   ),
@@ -221,23 +225,41 @@ class _BirthFormState extends State<BirthForm> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
                   _createTextField(
                       controller: _babyNameController,
                       focus: _babyNameFocus,
                       changeFocus: _babySurNameFocus,
                       label: "Name"),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
                   _createTextField(
                       controller: _babySurNameController,
                       focus: _babySurNameFocus,
                       changeFocus: _dobFocus,
                       label: "Surname"),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
                   _createTextField(
                       controller: _dobController,
                       focus: _dobFocus,
                       changeFocus: _birthAdressFocus,
                       label: "Date of Birth",
                       textInputType: TextInputType.datetime),
-                  DropDown(items: birthAddress),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  DropDown(items: birthAddress,
+                    onChanged: (String? value) {
+                      selectedValue=value;
+                    }),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.07,
+                  ),
                   ElevatedButton(
                     onPressed: () {},
                     child: const Text('Generate PDF'),
@@ -281,6 +303,7 @@ class _BirthFormState extends State<BirthForm> {
         onEditingComplete: () {
           FocusScope.of(context).requestFocus(changeFocus);
         },
+
       ),
     );
   }

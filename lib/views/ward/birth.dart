@@ -1,4 +1,4 @@
-import 'package:e_nagarpalika/birth_form.dart';
+import 'package:e_nagarpalika/views/ward/birth_form.dart';
 import 'package:flutter/material.dart';
 
 class BirthReg extends StatefulWidget {

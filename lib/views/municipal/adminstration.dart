@@ -8,7 +8,7 @@ class Adminstration extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Adminstration"),
-        ),
-        body: const Text("E-Sifarish Screen"));
+        )
+    );
   }
 }

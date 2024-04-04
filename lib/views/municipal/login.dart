@@ -1,3 +1,4 @@
+import 'package:e_nagarpalika/views/municipal/register.dart';
 import 'package:flutter/material.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -97,10 +98,25 @@ class _LoginState extends State<Login> {
                   },
                 ),
               ),
-              ElevatedButton(
-                onPressed: _login,
-                child: const Text('Login'),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).width*0.07,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children:[
+                  ElevatedButton(
+                    onPressed: _login,
+                    child: const Text('Login'),
+                  ),
+                  ElevatedButton(
+                    onPressed: _register,
+                    child:const Text("Register ?",
+                    textAlign: TextAlign.center,)
+                  ),
+
+                ]
+              )
+
             ],
           ),
         ),
@@ -114,5 +130,9 @@ class _LoginState extends State<Login> {
       String password = _passwordController.text;
       debugPrint("Email: $email, Password: $password");
     }
+  }
+
+  void _register() {
+  Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Register()));
   }
 }

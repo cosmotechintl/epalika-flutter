@@ -1,20 +1,21 @@
-import 'package:e_nagarpalika/tax_payment.dart';
-import 'package:e_nagarpalika/tourism_ward.dart';
-import 'package:e_nagarpalika/utility.dart';
-import 'package:e_nagarpalika/ward_info.dart';
+import 'package:e_nagarpalika/views/ward/tax_payment.dart';
+import 'package:e_nagarpalika/views/ward/tourism_ward.dart';
+import 'package:e_nagarpalika/service/utilities/utility.dart';
+import 'package:e_nagarpalika/views/ward/ward_info.dart';
 import 'package:flutter/material.dart';
-import 'death.dart';
-import 'esifarish_ward.dart';
-import 'forum_ward.dart';
-import 'helpline_ward.dart';
-import 'marraige.dart';
-import 'birth.dart';
+import '../ward/death.dart';
+import '../ward/esifarish_ward.dart';
+import '../ward/forum_ward.dart';
+import '../ward/helpline_ward.dart';
+import '../ward/marraige.dart';
+import '../ward/birth.dart';
 
 class WardServices extends StatelessWidget {
   const WardServices({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Utility.context=context;
     return Scaffold(
         appBar: AppBar(title: const Text("Ward Services")),
         body: Align(
