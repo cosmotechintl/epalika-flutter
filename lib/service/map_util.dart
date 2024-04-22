@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import '../models/map.dart';
 
 class MapUtils extends StatefulWidget {
-  MapModel locations;
+  final MapModel locations;
 
   MapUtils(this.locations, {super.key});
 

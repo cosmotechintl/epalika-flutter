@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DropDown extends StatefulWidget {
-  List<String> items;
+  final List<String> items;
   final ValueChanged<String?> onChanged;
-  String label;
+  final String label;
   DropDown({super.key, required this.items, required this.onChanged,required this.label});
   @override
   State<DropDown> createState() => _DropDownState(items);
