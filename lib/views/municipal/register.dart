@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../models/User.dart';
+import '../../models/user.dart';
 import '../../service/utilities/config.dart';
-import '../../service/utilities/dropdown.dart';
+import '../../service/utilities/customWidget/dropdown.dart';
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -148,7 +148,7 @@ class _RegisterState extends State<Register> {
                   ),
                   DropDown(items: gender, onChanged: (String? value) {
                     selectedGender = value;
-                  },),
+                  }, label: 'gender'),
                   SizedBox(
                     height: MediaQuery
                         .of(context)

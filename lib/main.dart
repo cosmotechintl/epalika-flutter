@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
 
   late Locale _currentLocale;
   void _changeLocale(Locale newLocale) {
-    setState(() {
+    setState((){
       _currentLocale = newLocale;
       LocaleManager.setLocale(context, newLocale);
     });
@@ -43,10 +43,6 @@ class _MyAppState extends State<MyApp> {
     _currentLocale=widget.savedLocale;
   }
 
-
- @override
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,15 +50,16 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         appBarTheme: const AppBarTheme(backgroundColor: Color(0xff64b5f6)),
         elevatedButtonTheme: ElevatedButtonThemeData(
-            style: TextButton.styleFrom(
-                backgroundColor: const Color(0xff64b5f6),
+            style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: const Color(0xff2196f3),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    wordSpacing: 2,
-                    letterSpacing: 2))),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                    wordSpacing: 2.0,
+                    letterSpacing: 2.0))),
         scaffoldBackgroundColor: const Color(0xFFFFFBFE),
       ),
       localizationsDelegates: const [
@@ -76,11 +73,9 @@ class _MyAppState extends State<MyApp> {
         Locale('ne'), // nepali
       ],
       locale: _currentLocale,
-      home:  HomeScreen(),
+      home: const HomeScreen(),
     );
   }
-
-
 }
 
 

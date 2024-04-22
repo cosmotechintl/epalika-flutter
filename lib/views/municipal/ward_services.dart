@@ -15,7 +15,6 @@ class WardServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Utility.context=context;
     return Scaffold(
         appBar: AppBar(title: const Text("Ward Services")),
         body: Align(
@@ -47,31 +46,31 @@ class WardServices extends StatelessWidget {
                 children: [
                   Utility.createCustomIconButton(
                       "marriage.png", "Marriage Registration", const MarriageReg(),
-                      isGrid: true),
+                      isGrid: true, context: context),
                   Utility.createCustomIconButton(
                       "birth.png", "Birth\nRegistration", const BirthReg(),
-                      isGrid: true),
+                      isGrid: true,context: context),
                   Utility.createCustomIconButton(
                       "death.png", "Death\nRegistration", const DeathReg(),
-                      isGrid: true),
+                      isGrid: true,context: context),
                   Utility.createCustomIconButton(
                       "tax.png", "Tax Payment", const TaxPayment(),
-                      isGrid: true),
+                      isGrid: true,context: context),
                   Utility.createCustomIconButton("helpline.png",
                       "Helpline Number", const HelplineNumberWard(),
-                      isGrid: true),
+                      isGrid: true,context: context),
                   Utility.createCustomIconButton(
                       "info.png", "Ward Info", const WardInfo(),
-                      isGrid: true),
+                      isGrid: true,context: context),
                   Utility.createCustomIconButton(
                       "tourism.png", "Tourism Area", const TourismAreaWard(),
-                      isGrid: true),
+                      isGrid: true,context: context),
                   Utility.createCustomIconButton(
                       "sifarish.png", "E-Sifarish", const ESifarishWard(),
-                      isGrid: true),
+                      isGrid: true,context: context),
                   Utility.createCustomIconButton(
                       "public.png", "Public Forum", const PublicForumWard(),
-                      isGrid: true),
+                      isGrid: true,context: context),
                 ],
               ),
             ),

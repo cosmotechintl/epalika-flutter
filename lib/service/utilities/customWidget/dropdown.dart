@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class DropDown extends StatefulWidget {
   List<String> items;
   final ValueChanged<String?> onChanged;
-  DropDown({super.key, required this.items, required this.onChanged});
+  String label;
+  DropDown({super.key, required this.items, required this.onChanged,required this.label});
   @override
   State<DropDown> createState() => _DropDownState(items);
 }
@@ -22,23 +23,30 @@ class _DropDownState extends State<DropDown> {
 
   @override
   Widget build(BuildContext context) {
+    String label=widget.label;
     return Container(
-      color: Color(0xFFEEEEEE),
+      color: const Color(0xFFEEEEEE),
       child: DropdownButtonFormField(
         decoration: InputDecoration(
-          labelText: 'Place of Birth',
+          labelText: label,
           border: OutlineInputBorder(),
         ),
-        dropdownColor: Color(0xFFEEEEEE),
+        dropdownColor: const Color(0xFFEEEEEE),
         items: items.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Padding(
-                padding: EdgeInsets.fromLTRB(5.0,1.0,0.0,0.0),
+                padding: const EdgeInsets.fromLTRB(5.0,1.0,0.0,0.0),
             child: Text(value)
             ),
           );
         }).toList(),
+        validator: (value){
+          if (value == null || value.isEmpty) {
+            return "Please mention your $label" ;
+          }
+          return null;
+        },
         onChanged: (String? value) {
           setState(() {
             dropDownValue = value;

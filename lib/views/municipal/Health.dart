@@ -9,6 +9,6 @@ class Health extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Health"),
         ),
-        body: const Text("Health Screen"));
+        body: const Text("Health"));
   }
 }

@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_nagarpalika/main.dart';
 import 'package:e_nagarpalika/views/municipal/Health.dart';
 import 'package:e_nagarpalika/views/municipal/NagarPatro.dart';
@@ -15,8 +14,9 @@ import 'package:e_nagarpalika/views/municipal/notice.dart';
 import 'package:e_nagarpalika/views/municipal/police.dart';
 import 'package:e_nagarpalika/views/municipal/public_forum.dart';
 import 'package:e_nagarpalika/views/municipal/queries.dart';
+import 'package:e_nagarpalika/views/municipal/story_screen.dart';
 import 'package:e_nagarpalika/views/municipal/suggestion.dart';
-import 'package:e_nagarpalika/views/municipal/toruism_area.dart';
+import 'package:e_nagarpalika/views/municipal/tourism_area.dart';
 import 'package:e_nagarpalika/service/utilities/utility.dart';
 import 'package:e_nagarpalika/views/municipal/ward_services.dart';
 import 'package:flutter/material.dart';
@@ -39,57 +39,61 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    Utility.context = context;
-    List<String> newsList = [
-      'News 1',
-      'News 2',
-      'News 3',
-    ];
     return Scaffold(
       drawer: Drawer(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(5.0, 30.0, 0.0, 0.0),
           children: [
             _LanguageSelectWidget(),
+            Utility.createCustomIconButton("doctor.png",
+                AppLocalizations.of(context)!.health, const Health(),
+                horizontal: true, context: context),
+            Utility.createCustomIconButton("education.png",
+                AppLocalizations.of(context)!.education, const Education(),
+                horizontal: true, context: context),
             Utility.createCustomIconButton(
-                "doctor.png", "Health", const Health(),
-                horizontal: true),
-            Utility.createCustomIconButton(
-                "education.png", "Education", const Education(),
-                horizontal: true),
-            Utility.createCustomIconButton(
-                "helpline.png", "Helpline Number", const HelplineNumber(),
-                horizontal: true),
-            Utility.createCustomIconButton(
-                "ambulance.png", "Ambulance", const Ambulance(),
-                horizontal: true),
-            Utility.createCustomIconButton(
-                "police.png", "Police", const Police(),
-                horizontal: true),
+                "helpline.png",
+                AppLocalizations.of(context)!.helplineNumber,
+                const HelplineNumber(),
+                horizontal: true,
+                context: context),
+            Utility.createCustomIconButton("ambulance.png",
+                AppLocalizations.of(context)!.ambulance, const Ambulance(),
+                horizontal: true, context: context),
+            Utility.createCustomIconButton("police.png",
+                AppLocalizations.of(context)!.police, const Police(),
+                horizontal: true, context: context),
             Utility.createCustomIconButton(
                 "administrator.png",
-                AppLocalizations.of(context)!.adminstration,
+                AppLocalizations.of(context)!.administration,
                 const Adminstration(),
-                horizontal: true),
+                horizontal: true,
+                context: context),
+            Utility.createCustomIconButton("tourism.png",
+                AppLocalizations.of(context)!.tourismArea, const TourismArea(),
+                horizontal: true, context: context),
+            Utility.createCustomIconButton("news.png",
+                AppLocalizations.of(context)!.newsPortal, const NewsPortal(),
+                horizontal: true, context: context),
             Utility.createCustomIconButton(
-                "tourism.png", "Tourism Area", const TourismArea(),
-                horizontal: true),
+                "blog.png", AppLocalizations.of(context)!.blog, const Blog(),
+                horizontal: true, context: context),
+            Utility.createCustomIconButton("environmentalism.png",
+                AppLocalizations.of(context)!.environment, const Environment(),
+                horizontal: true, context: context),
+            Utility.createCustomIconButton("note.png",
+                AppLocalizations.of(context)!.notice, const Notice(),
+                horizontal: true, context: context),
+            Utility.createCustomIconButton("suggestion.png",
+                AppLocalizations.of(context)!.suggestion, const Suggestion(),
+                horizontal: true, context: context),
             Utility.createCustomIconButton(
-                "news.png", "News Portal", const NewsPortal(),
-                horizontal: true),
-            Utility.createCustomIconButton("blog.png", "Blog", const Blog(),
-                horizontal: true),
-            Utility.createCustomIconButton(
-                "environmentalism.png", "Environment", const Environment(),
-                horizontal: true),
-            Utility.createCustomIconButton("note.png", "Notice", const Notice(),
-                horizontal: true),
-            Utility.createCustomIconButton(
-                "suggestion.png", "Suggestion", const Suggestion(),
-                horizontal: true),
-            Utility.createCustomIconButton(
-                "phone.png", "Contact Mayor", const ContactMayor(),
-                horizontal: true),
+                "phone.png",
+                AppLocalizations.of(context)!.contactMayor,
+                const ContactMayor(),
+                horizontal: true,
+                context: context
+            ),
           ],
         ),
       ),
@@ -120,146 +124,146 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.012,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.012,
             ),
-            NewsSwipePage(newsList: newsList),
+            //NewsSwipePage(newsList: newsList),
+            const StoryScreen(),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.025,
             ),
             Section(
-              title: 'Administrative Solutions',
+              title: AppLocalizations.of(context)!.administrativeSolutions,
               iconsAndTexts: [
                 IconAndText(
                     "administrator.png",
-                    AppLocalizations.of(context)!.adminstration,
+                    AppLocalizations.of(context)!.administration,
                     const Adminstration()),
                 IconAndText(
-                    "municipal.png", "Ward\nServices", const WardServices()),
-                IconAndText("salary.png", "Financial Services",
+                    "municipal.png",
+                    AppLocalizations.of(context)!.wardServices,
+                    const WardServices()),
+                IconAndText(
+                    "salary.png",
+                    AppLocalizations.of(context)!.financialServices,
                     const FinancialServices()),
-                IconAndText("law.png", "Law and Human\nRights",
+                IconAndText(
+                    "law.png",
+                    AppLocalizations.of(context)!.lawandHumanRights,
                     const LawandHumanRights()),
                 IconAndText(
-                    "nagarpatro.png", "Nagar Patro", const NagarPatro()),
-                IconAndText("phone.png", "Contact Mayor", const ContactMayor()),
-                IconAndText("query.png", "Queries", const Queries()),
+                    "nagarpatro.png",
+                    AppLocalizations.of(context)!.nagarPatro,
+                    const NagarPatro()),
+                IconAndText(
+                    "phone.png",
+                    AppLocalizations.of(context)!.contactMayor,
+                    const ContactMayor()),
+                IconAndText("query.png", AppLocalizations.of(context)!.queries,
+                    const Queries()),
               ],
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.025,
             ),
             Section(
-              title: 'Community Engagement',
+              title: AppLocalizations.of(context)!.communityEngagement,
               iconsAndTexts: [
-                IconAndText("education.png", "Education", const Education()),
-                IconAndText("doctor.png", "Health", const Health()),
+                IconAndText("education.png",
+                    AppLocalizations.of(context)!.education, const Education()),
+                IconAndText("doctor.png", AppLocalizations.of(context)!.health,
+                    const Health()),
                 IconAndText(
-                    "environmentalism.png", "Environment", const Environment()),
+                    "environmentalism.png",
+                    AppLocalizations.of(context)!.environment,
+                    const Environment()),
                 IconAndText(
-                    "tourism.png", "Tourism\narea", const TourismArea()),
+                    "tourism.png",
+                    AppLocalizations.of(context)!.tourismArea,
+                    const TourismArea()),
               ],
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.025,
             ),
             Section(
-              title: "Official Notices And\n Announcements",
+              title:
+              AppLocalizations.of(context)!.officialNoticesAndAnnouncements,
               iconsAndTexts: [
-                IconAndText("note.png", "Notice", const Notice()),
-                IconAndText("suggestion.png", "Suggestion", const Suggestion()),
-                IconAndText("sifarish.png", "E-sifarish", const ESifarish()),
+                IconAndText("note.png", AppLocalizations.of(context)!.notice,
+                    const Notice()),
+                IconAndText(
+                    "suggestion.png",
+                    AppLocalizations.of(context)!.suggestion,
+                    const Suggestion()),
+                IconAndText("sifarish.png",
+                    AppLocalizations.of(context)!.esifarish, const ESifarish()),
               ],
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.025,
             ),
-            Section(title: "Emergency Services", iconsAndTexts: [
-              IconAndText(
-                  "helpline.png", "Helpline\nNumbers", const HelplineNumber()),
-              IconAndText("ambulance.png", "Ambulance", const Ambulance()),
-              IconAndText("police.png", "Police", const Police()),
-            ]),
+            Section(
+                title: AppLocalizations.of(context)!.emergencyServices,
+                iconsAndTexts: [
+                  IconAndText(
+                      "helpline.png",
+                      AppLocalizations.of(context)!.helplineNumber,
+                      const HelplineNumber()),
+                  IconAndText(
+                      "ambulance.png",
+                      AppLocalizations.of(context)!.ambulance,
+                      const Ambulance()),
+                  IconAndText("police.png",
+                      AppLocalizations.of(context)!.police, const Police()),
+                ]),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.025,
             ),
             Section(
               title: "Online Information",
               iconsAndTexts: [
-                IconAndText("news.png", "News Portal", const NewsPortal()),
-                IconAndText("blog.png", "Blog", const Blog()),
+                IconAndText(
+                    "news.png",
+                    AppLocalizations.of(context)!.newsPortal,
+                    const NewsPortal()),
+                IconAndText("blog.png", AppLocalizations.of(context)!.blog,
+                    const Blog()),
               ],
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.025,
             ),
             Section(
-              title: "Public Forums",
+              title: AppLocalizations.of(context)!.publicForums,
               iconsAndTexts: [
                 IconAndText(
-                    "public.png", "Public\nForums", const PublicForum()),
+                    "public.png",
+                    AppLocalizations.of(context)!.publicForums,
+                    const PublicForum()),
               ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class NewsSwipePage extends StatefulWidget {
-  final List<String> newsList;
-
-  const NewsSwipePage({required this.newsList, super.key});
-
-  @override
-  _NewsSwipePageState createState() => _NewsSwipePageState(newsList: newsList);
-}
-
-class _NewsSwipePageState extends State<NewsSwipePage> {
-  List<String> newsList;
-
-  _NewsSwipePageState({required this.newsList});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: 200.0,
-      child: CarouselSlider.builder(
-        itemCount: newsList.length,
-        itemBuilder: (context, itemIndex, pageIndexView) {
-          return NewsCard(newsList[itemIndex]);
-        },
-        options: CarouselOptions(
-          autoPlay: true,
-          autoPlayInterval: const Duration(seconds: 3),
-          viewportFraction: 0.8,
-          aspectRatio: 2.0,
-          initialPage: 1,
-          enableInfiniteScroll: true,
-        ),
-      ),
-    );
-  }
-}
-
-class NewsCard extends StatelessWidget {
-  final String news;
-
-  const NewsCard(this.news, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 2.0,
-      color: const Color(0xff64b5f6),
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Text(
-            news,
-            style: const TextStyle(fontSize: 20.0),
-          ),
         ),
       ),
     );
@@ -275,7 +279,10 @@ class Section extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.92,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * 0.92,
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
@@ -298,29 +305,35 @@ class Section extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * 0.15,
             child: iconsAndTexts.length > 3
                 ? CustomScrollView(
-                    scrollDirection: Axis.horizontal,
-                    slivers: [
-                      SliverList.builder(
-                        itemCount: iconsAndTexts.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Utility.createCustomIconButton(
-                              iconsAndTexts[index].icon,
-                              iconsAndTexts[index].text,
-                              iconsAndTexts[index].screen);
-                        },
-                      ),
-                    ],
-                  )
+              scrollDirection: Axis.horizontal,
+              slivers: [
+                SliverList.builder(
+                  itemCount: iconsAndTexts.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Utility.createCustomIconButton(
+                        iconsAndTexts[index].icon,
+                        iconsAndTexts[index].text,
+                        iconsAndTexts[index].screen,
+                        context: context);
+                  },
+                ),
+              ],
+            )
                 : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: iconsAndTexts
-                        .map((data) => Utility.createCustomIconButton(
-                            data.icon, data.text, data.screen))
-                        .toList(),
-                  ),
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: iconsAndTexts
+                  .map((data) =>
+                  Utility.createCustomIconButton(
+                      data.icon, data.text, data.screen,
+                      context: context))
+                  .toList(),
+            ),
           ),
         ],
       ),
@@ -334,7 +347,7 @@ class _LanguageSelectWidget extends StatefulWidget {
 }
 
 class _LanguageSelectWidgetState extends State<_LanguageSelectWidget> {
-  late bool isSwitched;
+  late bool isSwitched = false;
   int count = 0;
 
   @override
@@ -355,7 +368,7 @@ class _LanguageSelectWidgetState extends State<_LanguageSelectWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Text("English"),
+        Text(AppLocalizations.of(context)!.english),
         Switch(
           value: isSwitched,
           onChanged: (bool value) {
@@ -364,7 +377,7 @@ class _LanguageSelectWidgetState extends State<_LanguageSelectWidget> {
                 context, value ? const Locale('ne') : const Locale('en'));
           },
         ),
-        const Text("Nepali"),
+        Text(AppLocalizations.of(context)!.nepali),
       ],
     );
   }

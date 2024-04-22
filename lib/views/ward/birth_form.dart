@@ -1,4 +1,6 @@
-import 'package:e_nagarpalika/service/utilities/dropdown.dart';
+import 'package:e_nagarpalika/service/utilities/customWidget/custom_radiobutton.dart';
+import 'package:e_nagarpalika/service/utilities/customWidget/dropdown.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -24,6 +26,7 @@ class _BirthFormState extends State<BirthForm> {
   final TextEditingController _babyNameController = TextEditingController();
   final TextEditingController _babySurNameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _babyCastecontroller = TextEditingController();
   final TextEditingController _birthDistrictController =
       TextEditingController();
   final TextEditingController _birthLocalController = TextEditingController();
@@ -32,13 +35,12 @@ class _BirthFormState extends State<BirthForm> {
   final TextEditingController _gpNameController = TextEditingController();
   final TextEditingController _gpSurnameController = TextEditingController();
   final TextEditingController _fatherNameController = TextEditingController();
-  final TextEditingController _fatherSurnameController =
-      TextEditingController();
+  final TextEditingController _fatherSurnameController = TextEditingController();
   final TextEditingController _motherNameController = TextEditingController();
   final TextEditingController _motherSurnameController =
-      TextEditingController();
+  TextEditingController();
   final TextEditingController _fatherDistrictController =
-      TextEditingController();
+  TextEditingController();
   final TextEditingController _fatherLocalController = TextEditingController();
   final TextEditingController _fatherWodanoController = TextEditingController();
   final TextEditingController _fatherSadakController = TextEditingController();
@@ -65,6 +67,7 @@ class _BirthFormState extends State<BirthForm> {
   final FocusNode _babyNameFocus = FocusNode();
   final FocusNode _babySurNameFocus = FocusNode();
   final FocusNode _dobFocus = FocusNode();
+  final FocusNode _babyCasteFocus = FocusNode();
   final FocusNode _birthDistrictFocus = FocusNode();
   final FocusNode _birthLocalFocus = FocusNode();
   final FocusNode _birthWodanoFocus = FocusNode();
@@ -87,198 +90,507 @@ class _BirthFormState extends State<BirthForm> {
   final FocusNode _motherSadakFocus = FocusNode();
   final FocusNode _motherGauFocus = FocusNode();
   final FocusNode _motherHouseNumberFocus = FocusNode();
+  int currentStep = 0;
 
-  String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
-    List<String> birthAddress = [
+    debugPrint(currentStep.toString());
+    List<String> personHelp = [
+      "Nurse",
+      "Man of House",
+      "Sudini",
+      "Doctor",
+      "Other",
+    ];
+    List<String> placeOfBirth = [
       "Hospital",
       "Home",
       "Health Institution",
       "other"
     ];
+    List<String> gender = [
+      "male",
+      "female",
+      "others",
+    ];
+    List<String> typeOfBirth=[
+      "Single",
+      "Twin",
+      "Triplet",
+      "More than triplet"
+    ];
+  String? selectedBirthType=typeOfBirth[0];
+  String ?selectedGender=gender[0];
+  String ?selectedPersonHelp=personHelp[0];
+  String ?selectedPlaceofBirth=placeOfBirth[0];
+    List<Step> _steps = [
+      Step(
+          state: currentStep > 0 ? StepState.complete : StepState.indexed,
+          isActive: currentStep >= 0,
+          title: Text("to be filled by register"),
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _createTextField(
+                  controller: _zoneController,
+                  focus: _zoneFocus,
+                  changeFocus: _districtFocus,
+                  label: "Zone"),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.05,
+              ),
+              _createTextField(
+                  controller: _districtController,
+                  focus: _districtFocus,
+                  changeFocus: _localFocus,
+                  label: "District"),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.05,
+              ),
+              _createTextField(
+                  controller: _localController,
+                  focus: _localFocus,
+                  changeFocus: _wadaNoFocus,
+                  label: "Ga.pa/N.Pa/M.N.P"),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.05,
+              ),
+              _createTextField(
+                  controller: _wadaNoController,
+                  focus: _wadaNoFocus,
+                  changeFocus: _registerNameFocus,
+                  label: "Ward No",
+                  textInputType: TextInputType.number
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.05,
+              ),
+              _createTextField(
+                  controller: _registerNameController,
+                  focus: _registerNameFocus,
+                  changeFocus: _employeeRefnoFocus,
+                  label: "Name of Local Register"),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.05,
+              ),
+              _createTextField(
+                  controller: _employeeRefnoController,
+                  focus: _employeeRefnoFocus,
+                  changeFocus: _regnoFocus,
+                  label: "Employee Reference No",
+                  textInputType: TextInputType.number),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.05,
+              ),
+              _createTextField(
+                  controller: _regnoController,
+                  focus: _regnoFocus,
+                  changeFocus: _regDateFocus,
+                  label: "Registration No.",
+                  textInputType: TextInputType.number),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.05,
+              ),
+              _createTextField(
+                  controller: _regDateController,
+                  focus: _regDateFocus,
+                  changeFocus: _babyNameFocus,
+                  label: "Form registration date",
+                  textInputType: TextInputType.datetime),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.05,
+              )
+            ],
+          )),
+      Step(
+          state: currentStep > 1 ? StepState.complete : StepState.indexed,
+          isActive: currentStep >= 1,
+          title: Text("details of New born baby"),
+          content: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _createTextField(
+                    controller: _babyNameController,
+                    focus: _babyNameFocus,
+                    changeFocus: _babySurNameFocus,
+                    label: "Name"),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                _createTextField(
+                    controller: _babySurNameController,
+                    focus: _babySurNameFocus,
+                    changeFocus: _dobFocus,
+                    label: "Surname"
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                _createTextField(
+                    controller: _dobController,
+                    focus: _dobFocus,
+                    changeFocus: _birthAdressFocus,
+                    label: "Date of Birth",
+                    textInputType: TextInputType.datetime),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                DropDown(
+                  items: placeOfBirth,
+                  onChanged: (String? value) {
+                    selectedPlaceofBirth = value;
+                  },
+                  label: 'Place of Birth',
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
+                DropDown(
+                  items: personHelp,
+                  onChanged: (String? value) {
+                    selectedPersonHelp = value;
+                  },
+                  label: 'Person who help during birth',
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
+                DropDown(
+                    items: gender,
+                    onChanged: (String? value) {
+                      selectedGender = value;
+                    },
+                    label: 'gender'),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
+                _createTextField(
+                    controller: _babyCastecontroller,
+                    focus: _babyCasteFocus,
+                    changeFocus: _dobFocus,
+                    label: "Caste/Race"
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
+                DropDown(
+                    items: typeOfBirth,
+                    onChanged: (String? value) {
+                      selectedBirthType = value;
+                    },
+                    label: 'Type of Birth'),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
+                DeformityWidget(_birthDistrictFocus),
+                Text("Address of Birth",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold
+                    ),
+                ),
+                _createTextField(
+                    controller: _birthDistrictController,
+                    changeFocus: _birthLocalFocus,
+                    label: "District",
+                    focus: _birthDistrictFocus
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
+                _createTextField(
+                    controller: _birthLocalController,
+                    changeFocus: _birthWodanoFocus,
+                    label: "Ga.pa/N.pa/M.N.P",
+                    focus: _birthLocalFocus
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
+                _createTextField(
+                    controller: _birthWodanoController,
+                    changeFocus: _birthAdressFocus,
+                    label: "Ward No",
+                    focus: _birthDistrictFocus
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
+                _createTextField(
+                    controller: _birthDistrictController,
+                    changeFocus:_gpNameFocus,
+                    label: "Address if Born in Abroad",
+                    focus: _birthDistrictFocus
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
+              ]
+          )
+      ),
+      Step(
+          title: Text("Details of baby's Grand Parents"),
+        content:  Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _createTextField(
+                controller: _gpNameController,
+                changeFocus:_gpSurnameFocus,
+                label: "Grandparent's Name",
+                focus: _gpNameFocus
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.width * 0.07,
+            ),
+            _createTextField(
+                controller: _gpSurnameController,
+                changeFocus:_fatherNameFocus,
+                label: "Grandparent's Name",
+                focus: _gpSurnameFocus
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.width * 0.07,
+            ),
+          ],
+        ),
+      ),
+      Step(title:Text("Details of baby's Parent") ,
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                  "Father Details",
+                style: TextStyle(
+                  fontWeight:FontWeight.bold
+                ),
+              ),
+              _createTextField(
+                  controller: _fatherNameController,
+                  changeFocus:_fatherSurnameFocus,
+                  label: "father's Name",
+                  focus: _fatherNameFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _fatherSurnameController,
+                  changeFocus:_fatherDistrictFocus,
+                  label: "father's Surname",
+                  focus: _fatherSurnameFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _fatherDistrictController,
+                  changeFocus:_fatherLocalFocus,
+                  label: "District",
+                  focus: _fatherDistrictFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _fatherLocalController,
+                  changeFocus:_fatherWodanoFocus,
+                  label: "Ga.Pa/N.P/M.N.P",
+                  focus: _fatherLocalFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _fatherWodanoController,
+                  changeFocus:_fatherSadakFocus,
+                  label: "Ward no",
+                  focus: _fatherWodanoFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _fatherSadakController,
+                  changeFocus:_fatherGauFocus,
+                  label: "sadak/marg",
+                  focus: _fatherSadakFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _fatherGauController,
+                  changeFocus:_fatherHouseNumberFocus,
+                  label: "Gau",
+                  focus: _fatherGauFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _fatherHouseNumberController,
+                  changeFocus:_motherNameFocus,
+                  label: "House Number",
+                  focus: _fatherHouseNumberFocus
+              ),
+              Text(
+                "Mother Details",
+                style: TextStyle(
+                    fontWeight:FontWeight.bold
+                ),
+              ),
+              _createTextField(
+                  controller: _motherNameController,
+                  changeFocus:_motherSurnameFocus,
+                  label: "Name",
+                  focus: _motherNameFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _motherSurnameController,
+                  changeFocus:_motherDistrictFocus,
+                  label: "Surname",
+                  focus: _motherSurnameFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _motherDistrictController,
+                  changeFocus:_motherLocalFocus,
+                  label: "District",
+                  focus: _motherDistrictFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _motherLocalController,
+                  changeFocus:_motherWodanoFocus,
+                  label: "Ga.Pa/N.P/M.N.P",
+                  focus: _motherLocalFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _motherWodanoController,
+                  changeFocus:_motherSadakFocus,
+                  label: "Ward no",
+                  focus: _motherWodanoFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _motherSadakController,
+                  changeFocus:_motherGauFocus,
+                  label: "sadak/marg",
+                  focus: _motherSadakFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _motherGauController,
+                  changeFocus:_motherHouseNumberFocus,
+                  label: "Gau",
+                  focus: _motherGauFocus
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.07,
+              ),
+              _createTextField(
+                  controller: _motherHouseNumberController,
+                  changeFocus:_motherNameFocus,
+                  label: "House Number",
+                  focus: _motherHouseNumberFocus
+              ),
+
+            ],
+          )
+      )
+    ];
+    bool isLastStep = currentStep == _steps.length - 1;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Birth Information Form"),
       ),
+
       body: Align(
         alignment: Alignment.topCenter,
         child: Form(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           key: _formKey,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.97,
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        top: BorderSide(width: 1.0, color: Colors.black),
-                        bottom: BorderSide(width: 1.0, color: Colors.black),
+          child: Stepper(
+              currentStep: currentStep,
+              physics: const BouncingScrollPhysics(),
+
+              onStepContinue: () {
+                if (!isLastStep) {
+                  setState(() {
+                    currentStep++;
+                    debugPrint(currentStep.toString());
+                  });
+                }
+              },
+
+              onStepCancel: () {
+                setState(() {
+                  currentStep--;
+                });
+              },
+
+              onStepTapped: (step) {
+                debugPrint(step.toString());
+                setState(() {
+                  currentStep = step;
+                });
+              },
+              steps: _steps,
+              controlsBuilder: (BuildContext context, ControlsDetails details) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: details.onStepContinue,
+                        child: Text(isLastStep ? "Generate\nPDF" : "Next"),
                       ),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        'To be filled by register office',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                    if (currentStep != 0)
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: details.onStepCancel,
+                          child: const Text('Previous'),
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _zoneController,
-                      focus: _zoneFocus,
-                      changeFocus: _districtFocus,
-                      label: "Zone"),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _districtController,
-                      focus: _districtFocus,
-                      changeFocus: _localFocus,
-                      label: "District"),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _localController,
-                      focus: _localFocus,
-                      changeFocus: _wadaNoFocus,
-                      label: "Ga.pa/N.Pa/M.N.P"),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _wadaNoController,
-                      focus: _wadaNoFocus,
-                      changeFocus: _registerNameFocus,
-                      label: "Ward No",
-                      textInputType: TextInputType.number),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _registerNameController,
-                      focus: _registerNameFocus,
-                      changeFocus: _employeeRefnoFocus,
-                      label: "Name of Local Register"),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _employeeRefnoController,
-                      focus: _employeeRefnoFocus,
-                      changeFocus: _regnoFocus,
-                      label: "Employee Reference No",
-                      textInputType: TextInputType.number
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _regnoController,
-                      focus: _regnoFocus,
-                      changeFocus: _regDateFocus,
-                      label: "Registration No.",
-                      textInputType: TextInputType.number
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _regDateController,
-                      focus: _regDateFocus,
-                      changeFocus: _babyNameFocus,
-                      label: "Form registration date",
-                      textInputType: TextInputType.datetime),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.97,
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        top: BorderSide(width: 1.0, color: Colors.black),
-                        bottom: BorderSide(width: 1.0, color: Colors.black),
-                      ),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        'Details of new born baby',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _babyNameController,
-                      focus: _babyNameFocus,
-                      changeFocus: _babySurNameFocus,
-                      label: "Name"),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _babySurNameController,
-                      focus: _babySurNameFocus,
-                      changeFocus: _dobFocus,
-                      label: "Surname"),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  _createTextField(
-                      controller: _dobController,
-                      focus: _dobFocus,
-                      changeFocus: _birthAdressFocus,
-                      label: "Date of Birth",
-                      textInputType: TextInputType.datetime),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  DropDown(items: birthAddress,
-                    onChanged: (String? value) {
-                      selectedValue=value;
-                    }),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.07,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Generate PDF'),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                  ],
+                );
+              }),
         ),
       ),
     );
   }
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Widget _createTextField(
       {required TextEditingController controller,
-      FocusNode? focus,
+      required FocusNode focus,
       required FocusNode changeFocus,
       required String label,
-      TextInputType textInputType = TextInputType.text}) {
+      TextInputType textInputType = TextInputType.name}) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.97,
       child: TextFormField(
@@ -303,8 +615,74 @@ class _BirthFormState extends State<BirthForm> {
         onEditingComplete: () {
           FocusScope.of(context).requestFocus(changeFocus);
         },
-
       ),
     );
   }
 }
+
+class DeformityWidget extends StatefulWidget {
+  @override
+  State<DeformityWidget> createState() => _DeformityWidgetState();
+  List<String>options= ["Yes","No"];
+  bool selectedOption=true;
+  FocusNode _birthDistrictFocusNode;
+  DeformityWidget(this._birthDistrictFocusNode);
+}
+class _DeformityWidgetState extends State<DeformityWidget>{
+  TextEditingController _babyDeformityController=TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+
+      children: [
+
+        Text("Any Physical Deformity"),
+
+        RadioGroup(
+            options:widget.options,
+            onChanged: (value){
+              debugPrint(value.toString());
+                  setState(() {
+                    widget.selectedOption= value == "Yes";
+                  });
+            }),
+
+        if(widget.selectedOption)
+
+          SizedBox(
+
+            width: MediaQuery.of(context).size.width * 0.97,
+            child: TextFormField(
+              controller: _babyDeformityController,
+              decoration: const InputDecoration(
+                labelText: "Mention Physical Deformity",
+                filled: true,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
+                fillColor: const Color(0xFFEEEEEE),
+                contentPadding: const EdgeInsets.all(5.0),
+              ),
+              keyboardType: TextInputType.name,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please mention your physical deformity';
+                }
+                return null;
+              },
+              onEditingComplete: () {
+                FocusScope.of(context).requestFocus(widget._birthDistrictFocusNode);
+              },
+            ),
+          ),
+        SizedBox(
+          height: MediaQuery.of(context).size.width * 0.07,
+        ),
+
+      ],
+    );
+  }
+}
+
