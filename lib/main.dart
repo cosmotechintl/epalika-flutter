@@ -1,4 +1,3 @@
-
 import 'package:e_nagarpalika/service/locale_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
