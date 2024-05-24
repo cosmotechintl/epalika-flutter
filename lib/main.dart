@@ -14,13 +14,13 @@ void main() async {
 class MyApp extends StatefulWidget {
   Locale savedLocale;
 
-  MyApp({Key? key, required this.savedLocale}) : super(key: key);
+  MyApp({super.key, required this.savedLocale});
 
   @override
   State<MyApp> createState() => _MyAppState();
 
-  static void setLocale(BuildContext  context,Locale newLocale){
-    _MyAppState? state = context. findAncestorStateOfType<_MyAppState>();
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
     state?._changeLocale(newLocale);
   }
 }
@@ -28,8 +28,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   late Locale _currentLocale;
+
   void _changeLocale(Locale newLocale) {
-    setState((){
+    setState(() {
       _currentLocale = newLocale;
       LocaleManager.setLocale(context, newLocale);
     });
@@ -39,7 +40,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _currentLocale=widget.savedLocale;
+    _currentLocale = widget.savedLocale;
   }
 
   @override
@@ -58,7 +59,10 @@ class _MyAppState extends State<MyApp> {
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0,
                     wordSpacing: 2.0,
-                    letterSpacing: 2.0))),
+                    letterSpacing: 2.0
+                )
+            )
+        ),
         scaffoldBackgroundColor: const Color(0xFFFFFBFE),
       ),
       localizationsDelegates: const [

@@ -18,108 +18,119 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            "Login",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
+    return Form(
+      key: _formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: MediaQuery
+                .of(context)
+                .size
+                .width * 0.9,
+            child: TextFormField(
+              controller: _emailController,
+              focusNode: _emailFocus,
+              decoration: const InputDecoration(
+                labelText: "User Email",
+                hintText: "User Email",
+                filled: true,
+                border: InputBorder.none,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                fillColor: Color(0xFFEEEEEE),
+                contentPadding: EdgeInsets.all(10.0),
+              ),
+              keyboardType: TextInputType.emailAddress,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                }
+                return null;
+              },
+              onEditingComplete: () {
+                FocusScope.of(context).requestFocus(_passwordFocus);
+              },
             ),
           ),
-        ),
-      ),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: Form(
-          key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextFormField(
-                  controller: _emailController,
-                  focusNode: _emailFocus,
-                  decoration: const InputDecoration(
-                    labelText: "User Email",
-                    hintText: "User Email",
-                    filled: true,
-                    border: InputBorder.none,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    fillColor: Color(0xFFEEEEEE),
-                    contentPadding: EdgeInsets.all(10.0),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    return null;
-                  },
-                  onEditingComplete: () {
-                    FocusScope.of(context).requestFocus(_passwordFocus);
-                  },
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.width * 0.05,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextFormField(
-                  controller: _passwordController,
-                  focusNode: _passwordFocus,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: "Password",
-                    hintText: "Password",
-                    filled: true,
-                    border: InputBorder.none,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    fillColor: Color(0xFFEEEEEE),
-                    contentPadding: EdgeInsets.all(8.0),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
-                  onEditingComplete: () {
-                    _login();
-                  },
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.sizeOf(context).width*0.07,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children:[
-                  ElevatedButton(
-                    onPressed: _login,
-                    child: const Text('Login'),
-                  ),
-                  ElevatedButton(
-                    onPressed: _register,
-                    child:const Text("Register ?",
-                    textAlign: TextAlign.center,)
-                  ),
-
-                ]
-              )
-
-            ],
+          SizedBox(
+            height: MediaQuery
+                .of(context)
+                .size
+                .width * 0.05,
           ),
-        ),
+          SizedBox(
+            width: MediaQuery
+                .of(context)
+                .size
+                .width * 0.9,
+            child: TextFormField(
+              controller: _passwordController,
+              focusNode: _passwordFocus,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: "Password",
+                hintText: "Password",
+                filled: true,
+                border: InputBorder.none,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                fillColor: Color(0xFFEEEEEE),
+                contentPadding: EdgeInsets.all(8.0),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your password';
+                }
+                return null;
+              },
+              onEditingComplete: () {
+                _login();
+              },
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery
+                .sizeOf(context)
+                .width * 0.07,
+          ),
+          ElevatedButton(
+              onPressed: _login,
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(MediaQuery
+                      .sizeOf(context)
+                      .width * 0.7,
+                      MediaQuery
+                          .sizeOf(context)
+                          .height * 0.05
+                  ),
+                  backgroundColor: const Color(0xff2196f3)
+              ),
+              child: const Text('Login')
+          ),
+          SizedBox(
+            height: MediaQuery
+                .sizeOf(context)
+                .width * 0.03,
+          ),
+          ElevatedButton(
+              onPressed: _register,
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(MediaQuery
+                      .sizeOf(context)
+                      .width * 0.7, MediaQuery
+                      .sizeOf(context)
+                      .height * 0.05)
+              ),
+              child: const Text("Register ?",
+                textAlign: TextAlign.center,)
+          )
+
+        ],
       ),
     );
   }
@@ -133,6 +144,7 @@ class _LoginState extends State<Login> {
   }
 
   void _register() {
-  Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Register()));
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const Register()));
   }
 }

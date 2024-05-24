@@ -79,34 +79,37 @@ class _StoryScreenState extends State<StoryScreen> {
                   ),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                child: Card(
-                  elevation: 1.0,
-                  child: Stack(
-                    children: [
-                      Image.network(
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: const Color(0xff2196f3)),
+
+                      ),
+                      child: Image.network(
                         news[index].imageUrl,
                         fit: BoxFit.cover,
                       ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 16),
-                          child: Text(
-                            news[index].title,
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              color: Color(0xffffffff),
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.left,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 16),
+                        child: Text(
+                          news[index].title,
+                          style: const TextStyle(
+                            fontSize: 15.0,
+                            color: Color(0xffffffff),
+                            fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.left,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             );
@@ -166,7 +169,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
             itemBuilder: (BuildContext context, int pageIndex) {
               final newsItem = widget.news[pageIndex];
               return Container(
-                color: Colors.grey, // Set the background color
+                color: Colors.grey,
                 padding: const EdgeInsets.symmetric(
                     vertical: 50.0, horizontal: 20.0),
                 child: Column(

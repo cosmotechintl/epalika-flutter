@@ -35,11 +35,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     List<String> gender = ["male", "Female", "others"];
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Register"),
-        ),
-        body: Form(
+    return Form(
           key: _formKey,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Padding(
@@ -164,8 +160,7 @@ class _RegisterState extends State<Register> {
               ),
             ),
           ),
-        )
-    );
+        );
   }
 
   Widget _createTextField({required TextEditingController controller,

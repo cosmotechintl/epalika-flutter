@@ -22,12 +22,12 @@ import 'package:e_nagarpalika/views/municipal/ward_services.dart';
 import 'package:flutter/material.dart';
 import 'package:e_nagarpalika/views/municipal/blog.dart';
 import 'package:e_nagarpalika/views/municipal/contact_mayor.dart';
-import 'package:e_nagarpalika/views/municipal/login.dart';
 
 import '../../models/button_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../service/locale_manager.dart';
+import 'login2.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -108,7 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => const Login()));
+                    context,
+                    MaterialPageRoute(builder: (_) => LoginRegister()));
               },
               icon: const Icon(
                 Icons.account_circle,
